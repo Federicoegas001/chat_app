@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intentofirebase/components/chat_bubble.dart';
 import 'package:intentofirebase/components/my_text_field.dart';
 import 'package:intentofirebase/services/chat/chat_service.dart';
 
@@ -94,7 +93,17 @@ class _ChatPageState extends State<ChatPage> {
             const SizedBox(
               height: 5,
             ),
-            ChatBubble(message: data['message'])
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: data['senderId'] != _firebaseAuth.currentUser!.uid
+                      ? Colors.pink
+                      : Colors.blue,
+                  borderRadius: BorderRadius.circular(9)),
+              child: Text(
+                data['message'],
+              ),
+            )
           ],
         ),
       ),
